@@ -1,0 +1,53 @@
+ void merge(int arr[], int l, int m, int r)
+    {
+        
+         int n1=m-l+1;             // creating temporary arrays 
+         int n2=r-m;
+         int a1[n1];
+         int a2[n2];
+         int i;
+         int j;
+         for( i=0;i<n1;i++){      //copying the value of original array to temporary array
+             a1[i]=arr[l+i];
+         }
+         for( j=0;j<n2;j++){
+             a2[j]=arr[m+1+j];
+         }
+         
+          i=0;
+          j=0;
+         int k=l;
+         while(i<n1 && j<n2){    // both i and j less than n1 & n2 respectively
+             if(a1[i]<=a2[j]){   // if a2 element is greater or equal to a1 ,then use a1 element
+                 arr[k]=a1[i];
+                 i++;
+                 k++;
+             }
+             else {
+                 arr[k]=a2[j];   //elsecopy a2 element
+                 j++;
+                 k++;
+             }
+         }
+         while(i<n1){           //copy remaiming elements as it is
+              arr[k]=a1[i];
+                 i++;
+                 k++;
+         }
+         while(j<n2){
+             arr[k]=a2[j];
+                 j++;
+                 k++;
+         }
+    }
+    
+    public:
+    void mergeSort(int arr[], int l, int r)
+    {
+        int mid = l+ (r-l)/2;
+        if(l>=r) return;
+        mergeSort(arr,l,mid);
+        mergeSort(arr,mid+1,r);
+        merge(arr,l,mid,r);
+    }
+};
